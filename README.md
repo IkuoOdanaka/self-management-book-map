@@ -1,6 +1,7 @@
 # エンジニアのための自己管理入門 ─ 章構成マップ
 
-書籍『[エンジニアのための自己管理入門](https://www.shoeisha.co.jp/book/)』（翔泳社・2026年6月24日発売／小田中育生 著）の
+書籍『[エンジニアのための自己管理入門 堅牢でスケーラブルな働き方を構築する技術](https://www.shoeisha.co.jp/book/detail/9784798194066)』
+（翔泳社・2026年6月24日発売／小田中育生 著／ISBN 978-4-7981-9406-6）の
 章構成を、クリックして辿れるマップにしたものです。
 
 **公開URL**: https://ikuoodanaka.github.io/self-management-book-map/
