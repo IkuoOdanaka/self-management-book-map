@@ -74,6 +74,39 @@
   .meta { display: flex; flex-wrap: wrap; gap: 8px 10px; font-size: 12px; color: var(--ink-soft); }
   .meta span { border: 1px solid var(--line); border-radius: 999px; padding: 2px 11px; }
 
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .btn {
+    display: inline-block; text-decoration: none; font-size: 13.5px; font-weight: 600;
+    padding: 8px 18px; border-radius: 8px;
+    border: 1px solid var(--line-strong); color: var(--ink);
+    transition: border-color .15s, transform .15s;
+  }
+  .btn:hover { border-color: var(--ink-soft); transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-primary:hover { border-color: var(--accent); filter: brightness(1.08); }
+
+  /* ---------- 引用書籍カード ---------- */
+  .refs { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .ref {
+    display: grid; grid-template-columns: 54px minmax(0,1fr); gap: 13px; align-items: start;
+    text-decoration: none; color: inherit;
+    border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px;
+    transition: border-color .15s, transform .15s;
+  }
+  .ref:hover { border-color: var(--dc); transform: translateY(-1px); }
+  .ref img {
+    width: 54px; height: auto; display: block; border-radius: 3px;
+    background: var(--line);
+    box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  }
+  .ref-body { min-width: 0; }
+  .ref-body > span { display: block; }
+  .ref-title { font-size: 13.5px; font-weight: 600; line-height: 1.5; }
+  .ref-by { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .ref-note { font-size: 12.5px; color: var(--ink-mid); margin-top: 5px; }
+  .ref-go { font-size: 11.5px; color: var(--dc); font-weight: 600; margin-top: 5px; }
+  .refs-none { font-size: 12.5px; color: var(--ink-soft); margin: 0; }
+
   /* ---------- layout ---------- */
   .cols { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 34px; align-items: start; }
   @media (max-width: 900px) { .cols { grid-template-columns: 1fr; gap: 26px; } }
@@ -182,6 +215,10 @@
     <span>各章末に エンジニア視点 / マネージャー視点 Tips</span>
     <span>ISBN 978-4-7981-9406-6</span>
   </div>
+  <div class="cta">
+    <a class="btn btn-primary" id="buyLink" href="#" rel="noopener">Amazonで見る</a>
+    <a class="btn" href="https://www.shoeisha.co.jp/book/detail/9784798194066" rel="noopener">翔泳社の書籍ページ</a>
+  </div>
 </header>
 
 <div class="cols">
@@ -233,11 +270,49 @@
   <p>『エンジニアのための自己管理入門 堅牢でスケーラブルな働き方を構築する技術』（翔泳社・2026年6月24日発売／小田中育生 著）の章構成マップです。掲載内容は書籍の一部を要約したものです。</p>
   <p>イラスト：北川ともあきさん／編集：小田倉怜央さん</p>
   <p><a href="https://www.shoeisha.co.jp/book/detail/9784798194066" rel="noopener">翔泳社の書籍ページ</a></p>
+  <p>Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。書影の著作権は各出版社・著作者に帰属します。</p>
 </footer>
 
 </div>
 
 <script>
+/* ============================================================
+   Amazon リンク
+   ------------------------------------------------------------
+   AMAZON_TAG を空文字にすると、タグなしの通常リンクになります。
+   ============================================================ */
+const AMAZON_TAG = "doraem00-22";
+const BOOK_ASIN  = "4798194069";   // エンジニアのための自己管理入門
+
+const amazonUrl = asin =>
+  `https://www.amazon.co.jp/dp/${asin}` + (AMAZON_TAG ? `?tag=${AMAZON_TAG}` : "");
+const coverUrl = asin =>
+  `https://m.media-amazon.com/images/P/${asin}.09._SCLZZZZZZZ_.jpg`;
+
+document.getElementById("buyLink").href = amazonUrl(BOOK_ASIN);
+
+/* ============================================================
+   各章の背景にある本
+   ------------------------------------------------------------
+   asin  … Amazon の商品URL末尾 (/dp/XXXXXXXXXX)。書影もこれで引きます
+   note  … その章とどう繋がるかの一行
+   ============================================================ */
+const REFS = {
+  ch1: [],
+  ch2: [
+    { asin: "4822281116", title: "ゆとりの法則 ─ 誰も書かなかったプロジェクト管理の誤解",
+      by: "トム・デマルコ 著／伊豆原弓 訳（日経BP）",
+      note: "「余白は怠惰ではない。変化に追随するための投資である」— 第2章の余白の考え方の下敷き。" },
+    { asin: "4001141272", title: "モモ",
+      by: "ミヒャエル・エンデ 著／大島かおり 訳（岩波少年文庫）",
+      note: "時間どろぼうに時間を奪われる物語。「時間がない」の正体を考える出発点。" }
+  ],
+  ch3: [],
+  ch4: [],
+  ch5: [],
+  intro: [], final: [], appendix: []
+};
+
 const CHAPTERS = [
   {
     key: "ch1", n: 1, color: "var(--c1)",
@@ -426,6 +501,23 @@ Object.assign(ALL, EXTRAS);
 
 const detail = document.getElementById("detail");
 
+function renderRefs(key) {
+  const list = REFS[key] || [];
+  if (!list.length) return "";
+  return `
+    <p class="d-h">この章の背景にある本</p>
+    <ul class="refs">${list.map(r => `
+      <li><a class="ref" href="${amazonUrl(r.asin)}" rel="noopener sponsored" target="_blank">
+        <img src="${coverUrl(r.asin)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">
+        <span class="ref-body">
+          <span class="ref-title">${r.title}</span>
+          <span class="ref-by">${r.by}</span>
+          ${r.note ? `<span class="ref-note">${r.note}</span>` : ""}
+          <span class="ref-go">Amazonで見る →</span>
+        </span>
+      </a></li>`).join("")}</ul>`;
+}
+
 function render(key) {
   const d = ALL[key];
   detail.style.setProperty("--dc", d.color);
@@ -445,6 +537,8 @@ function render(key) {
 
     <p class="d-h">キーワード</p>
     <ul class="tags">${d.tags.map(t => `<li>${t}</li>`).join("")}</ul>
+
+    ${renderRefs(key)}
   `;
 
   document.querySelectorAll(".node").forEach(n =>

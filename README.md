@@ -50,6 +50,27 @@ index.html   すべて（HTML / CSS / JS / データ）がこの1ファイルに
 章のデータは `index.html` 内の `CHAPTERS` 配列と `EXTRAS` オブジェクトにあります。
 文言を直したいときはここを編集してください。
 
+### 引用書籍を追加する
+
+各章の「この章の背景にある本」は `REFS` オブジェクトで管理しています。
+章キー（`ch1`〜`ch5` / `intro` / `final` / `appendix`）の配列に足すだけです。
+
+```js
+ch3: [
+  { asin: "XXXXXXXXXX",           // Amazon商品URL末尾 (/dp/XXXXXXXXXX)。書影もこれで引く
+    title: "書名",
+    by:    "著者 著／訳者 訳（出版社）",
+    note:  "その章とどう繋がるかの一行" }
+],
+```
+
+書影は `https://m.media-amazon.com/images/P/{asin}.09._SCLZZZZZZZ_.jpg` から取得します。
+画像が無い商品では自動的に非表示になります（`onerror`）。
+配列が空の章は、セクションごと表示されません。
+
+Amazonアソシエイトのタグは冒頭の `AMAZON_TAG` にあります。
+空文字にすると全リンクがタグなしの通常URLになります。
+
 ## ライセンス
 
 コードは MIT License（[LICENSE](LICENSE)）。
