@@ -10,44 +10,52 @@
 <meta property="og:description" content="書籍『エンジニアのための自己管理入門』（翔泳社）の章構成を、クリックして辿れるマップにしました。いま一番痛いところから読む章を選べます。">
 <meta name="twitter:card" content="summary_large_image">
 <style>
+  /* ------------------------------------------------------------
+     配色は書籍カバーから採取。
+     地の色 #64C4D2 ／ 白 ／ 墨色 の3色構成を基準にしている。
+     ------------------------------------------------------------ */
   :root {
-    --bg: #f7f6f3;
-    --panel: #ffffff;
-    --ink: #1c1e21;
-    --ink-mid: #4a4f57;
-    --ink-soft: #7c828c;
-    --line: #e2e0da;
-    --line-strong: #cfccc3;
-    --accent: #1f6f5c;
-    --shadow: 0 1px 2px rgba(28,30,33,.05), 0 8px 24px rgba(28,30,33,.06);
+    --cover: #64C4D2;          /* カバーの地の色そのもの */
 
-    --c1: #b97309;
-    --c2: #1f7a63;
-    --c3: #b04a52;
-    --c4: #6a5bb5;
-    --c5: #2b6ca8;
-    --c0: #6d7480;
-    --c6: #3d7a55;
+    --bg: #eaf4f7;
+    --panel: #ffffff;
+    --ink: #16252b;
+    --ink-mid: #465b63;
+    --ink-soft: #617880;
+    --line: #d5e7ec;
+    --line-strong: #b2d3dc;
+    --accent: #12798d;         /* #64C4D2 を文字色として使える濃度まで落としたもの */
+    --on-accent: #ffffff;      /* アクセント色・章の色の上に載せる文字色 */
+    --shadow: 0 1px 2px rgba(22,37,43,.05), 0 8px 24px rgba(22,37,43,.07);
+
+    --c1: #a5650b;
+    --c2: #147a86;
+    --c3: #b1495a;
+    --c4: #6353ab;
+    --c5: #2a63a6;
+    --c0: #6b7c84;
+    --c6: #2f7f61;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #16181b;
-      --panel: #1e2125;
-      --ink: #eceef1;
-      --ink-mid: #b8bec7;
-      --ink-soft: #868d98;
-      --line: #2e3339;
-      --line-strong: #3d444c;
-      --accent: #5fbfa3;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+      --bg: #0e1a1f;
+      --panel: #15252b;
+      --ink: #e7f1f4;
+      --ink-mid: #b0c5cc;
+      --ink-soft: #7d959d;
+      --line: #22383f;
+      --line-strong: #33505a;
+      --accent: #64C4D2;       /* 暗所ではカバーの色をそのまま使える */
+      --on-accent: #0e1a1f;    /* 明るい色の上なので、文字は逆に濃色にする */
+      --shadow: 0 1px 2px rgba(0,0,0,.32), 0 8px 24px rgba(0,0,0,.4);
 
-      --c1: #e2a552;
-      --c2: #5cbba0;
-      --c3: #e08b92;
-      --c4: #a496e8;
-      --c5: #6faede;
-      --c0: #a2a9b4;
-      --c6: #79bd94;
+      --c1: #e0a555;
+      --c2: #5cc0cd;
+      --c3: #e28c99;
+      --c4: #a294e6;
+      --c5: #6fa8e0;
+      --c0: #9fb0b8;
+      --c6: #63c2a0;
     }
   }
 
@@ -64,7 +72,20 @@
   .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 20px 80px; }
 
   /* ---------- header ---------- */
-  header { border-bottom: 1px solid var(--line); padding-bottom: 22px; margin-bottom: 30px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 26px; margin-bottom: 30px; }
+
+  .hero { display: grid; grid-template-columns: 180px minmax(0,1fr); gap: 30px; align-items: start; }
+  .hero-cover { display: block; line-height: 0; border-radius: 4px; }
+  .hero-cover img {
+    width: 100%; height: auto; border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(22,37,43,.14), 0 14px 32px rgba(22,37,43,.16);
+    transition: transform .18s;
+  }
+  .hero-cover:hover img { transform: translateY(-3px); }
+  .hero-body { min-width: 0; padding-top: 2px; }
+  @media (max-width: 700px) {
+    .hero { grid-template-columns: 116px minmax(0,1fr); gap: 18px; }
+  }
   .eyebrow {
     font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
     color: var(--accent); font-weight: 700; margin: 0 0 8px;
@@ -82,7 +103,7 @@
     transition: border-color .15s, transform .15s;
   }
   .btn:hover { border-color: var(--ink-soft); transform: translateY(-1px); }
-  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   .btn-primary:hover { border-color: var(--accent); filter: brightness(1.08); }
 
   /* ---------- 引用書籍カード ---------- */
@@ -138,13 +159,13 @@
   .node.is-active .disc { fill: var(--nc); stroke-width: 3; }
   .node .num { fill: var(--nc); font-size: 11px; font-weight: 700; letter-spacing: .08em; }
   .node .name { fill: var(--ink); font-size: 13.5px; font-weight: 600; }
-  .node.is-active .num, .node.is-active .name { fill: #fff; }
+  .node.is-active .num, .node.is-active .name { fill: var(--on-accent); }
   .node:focus { outline: none; }
   .node:focus-visible .disc { stroke: var(--ink); stroke-width: 3; }
   .spoke { stroke: var(--line-strong); stroke-width: 1; }
   .spoke.is-active { stroke: var(--nc); stroke-width: 2; }
-  .hub-ring { fill: none; stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 5; }
-  .hub-disc { fill: var(--panel); stroke: var(--accent); stroke-width: 1.5; }
+  .hub-ring { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 3 5; }
+  .hub-disc { fill: var(--panel); stroke: var(--accent); stroke-width: 2; }
   .hub-t1 { fill: var(--accent); font-size: 10.5px; font-weight: 700; letter-spacing: .12em; }
   .hub-t2 { fill: var(--ink); font-size: 13px; font-weight: 600; }
   .hub-t3 { fill: var(--ink-soft); font-size: 11px; }
@@ -204,6 +225,12 @@
 <div class="wrap">
 
 <header>
+  <div class="hero">
+  <a class="hero-cover" id="coverLink" href="#" rel="noopener">
+    <img src="https://m.media-amazon.com/images/P/4798194069.09._SCLZZZZZZZ_.jpg"
+         alt="『エンジニアのための自己管理入門』書影" width="352" height="500">
+  </a>
+  <div class="hero-body">
   <p class="eyebrow">Book Map</p>
   <h1>エンジニアのための自己管理入門</h1>
   <p class="tagline">堅牢でスケーラブルな働き方を構築する技術</p>
@@ -218,6 +245,8 @@
   <div class="cta">
     <a class="btn btn-primary" id="buyLink" href="#" rel="noopener">Amazonで見る</a>
     <a class="btn" href="https://www.shoeisha.co.jp/book/detail/9784798194066" rel="noopener">翔泳社の書籍ページ</a>
+  </div>
+  </div>
   </div>
 </header>
 
@@ -289,7 +318,8 @@ const amazonUrl = asin =>
 const coverUrl = asin =>
   `https://m.media-amazon.com/images/P/${asin}.09._SCLZZZZZZZ_.jpg`;
 
-document.getElementById("buyLink").href = amazonUrl(BOOK_ASIN);
+document.getElementById("buyLink").href  = amazonUrl(BOOK_ASIN);
+document.getElementById("coverLink").href = amazonUrl(BOOK_ASIN);
 
 /* ============================================================
    各章の背景にある本
