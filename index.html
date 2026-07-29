@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>エンジニアのための自己管理入門 ─ 章構成マップ</title>
+<meta name="description" content="書籍『エンジニアのための自己管理入門』（翔泳社）の章構成を、クリックして辿れるマップにしました。いま一番痛いところから読む章を選べます。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="エンジニアのための自己管理入門 ─ 章構成マップ">
+<meta property="og:description" content="書籍『エンジニアのための自己管理入門』（翔泳社）の章構成を、クリックして辿れるマップにしました。いま一番痛いところから読む章を選べます。">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --panel: #ffffff;
+    --ink: #1c1e21;
+    --ink-mid: #4a4f57;
+    --ink-soft: #7c828c;
+    --line: #e2e0da;
+    --line-strong: #cfccc3;
+    --accent: #1f6f5c;
+    --shadow: 0 1px 2px rgba(28,30,33,.05), 0 8px 24px rgba(28,30,33,.06);
+
+    --c1: #b97309;
+    --c2: #1f7a63;
+    --c3: #b04a52;
+    --c4: #6a5bb5;
+    --c5: #2b6ca8;
+    --c0: #6d7480;
+    --c6: #3d7a55;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181b;
+      --panel: #1e2125;
+      --ink: #eceef1;
+      --ink-mid: #b8bec7;
+      --ink-soft: #868d98;
+      --line: #2e3339;
+      --line-strong: #3d444c;
+      --accent: #5fbfa3;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+
+      --c1: #e2a552;
+      --c2: #5cbba0;
+      --c3: #e08b92;
+      --c4: #a496e8;
+      --c5: #6faede;
+      --c0: #a2a9b4;
+      --c6: #79bd94;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 20px 80px; }
+
+  /* ---------- header ---------- */
+  header { border-bottom: 1px solid var(--line); padding-bottom: 22px; margin-bottom: 30px; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin: 0 0 8px;
+  }
+  h1 { font-size: clamp(22px, 3.4vw, 31px); margin: 0 0 6px; letter-spacing: .01em; }
+  .tagline { color: var(--ink-mid); font-size: 14px; margin: 0 0 14px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 10px; font-size: 12px; color: var(--ink-soft); }
+  .meta span { border: 1px solid var(--line); border-radius: 999px; padding: 2px 11px; }
+
+  /* ---------- layout ---------- */
+  .cols { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 34px; align-items: start; }
+  @media (max-width: 900px) { .cols { grid-template-columns: 1fr; gap: 26px; } }
+
+  .hint { font-size: 12px; color: var(--ink-soft); text-align: center; margin: 0 0 12px; }
+
+  /* ---------- bookend pills ---------- */
+  .bookend {
+    display: block; width: 100%; text-align: left; cursor: pointer;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 11px 15px; font: inherit; color: var(--ink);
+    transition: border-color .15s, transform .15s;
+  }
+  .bookend:hover { border-color: var(--line-strong); transform: translateY(-1px); }
+  .bookend[aria-pressed="true"] { border-color: var(--be); box-shadow: inset 3px 0 0 var(--be); }
+  .bookend .bk-label { font-size: 11px; letter-spacing: .1em; color: var(--be); font-weight: 700; }
+  .bookend .bk-title { font-size: 14px; font-weight: 600; }
+  .bookend .bk-sub { font-size: 12px; color: var(--ink-soft); }
+  .connector { width: 1px; height: 16px; background: var(--line-strong); margin: 0 auto; }
+
+  /* ---------- svg map ---------- */
+  .map { width: 100%; height: auto; display: block; overflow: visible; }
+  .node { cursor: pointer; }
+  .node .disc {
+    fill: var(--panel); stroke: var(--nc); stroke-width: 1.5;
+    transition: stroke-width .15s, fill .15s;
+  }
+  .node:hover .disc { stroke-width: 3; }
+  .node.is-active .disc { fill: var(--nc); stroke-width: 3; }
+  .node .num { fill: var(--nc); font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+  .node .name { fill: var(--ink); font-size: 13.5px; font-weight: 600; }
+  .node.is-active .num, .node.is-active .name { fill: #fff; }
+  .node:focus { outline: none; }
+  .node:focus-visible .disc { stroke: var(--ink); stroke-width: 3; }
+  .spoke { stroke: var(--line-strong); stroke-width: 1; }
+  .spoke.is-active { stroke: var(--nc); stroke-width: 2; }
+  .hub-ring { fill: none; stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 5; }
+  .hub-disc { fill: var(--panel); stroke: var(--accent); stroke-width: 1.5; }
+  .hub-t1 { fill: var(--accent); font-size: 10.5px; font-weight: 700; letter-spacing: .12em; }
+  .hub-t2 { fill: var(--ink); font-size: 13px; font-weight: 600; }
+  .hub-t3 { fill: var(--ink-soft); font-size: 11px; }
+  text { text-anchor: middle; dominant-baseline: middle; font-family: inherit; }
+
+  /* ---------- detail panel ---------- */
+  .detail {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    padding: 26px 26px 28px; box-shadow: var(--shadow);
+    border-top: 3px solid var(--dc);
+  }
+  @media (max-width: 900px) { .detail { padding: 22px 18px 24px; } }
+  .d-label { font-size: 11px; letter-spacing: .16em; font-weight: 700; color: var(--dc); margin: 0 0 4px; }
+  .d-title { font-size: 21px; margin: 0 0 2px; }
+  .d-catch { font-size: 13px; color: var(--dc); margin: 0 0 16px; font-weight: 600; }
+  .d-lead { font-size: 14.5px; color: var(--ink-mid); margin: 0 0 20px; }
+  .d-lead strong { color: var(--ink); font-weight: 600; }
+
+  .d-h { font-size: 11px; letter-spacing: .12em; font-weight: 700; color: var(--ink-soft); margin: 22px 0 10px; }
+  .d-h:first-of-type { margin-top: 0; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 4px; padding: 0; list-style: none; }
+  .chips li {
+    font-size: 12.5px; padding: 4px 12px; border-radius: 999px;
+    background: color-mix(in srgb, var(--dc) 11%, transparent);
+    color: var(--dc); font-weight: 600;
+  }
+
+  .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .points li { padding-left: 15px; border-left: 2px solid color-mix(in srgb, var(--dc) 35%, transparent); }
+  .points b { display: block; font-size: 14px; font-weight: 600; }
+  .points span { display: block; font-size: 13.5px; color: var(--ink-mid); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .tags li {
+    font-size: 11.5px; color: var(--ink-soft);
+    border: 1px solid var(--line); border-radius: 5px; padding: 2px 8px;
+  }
+
+  .quote {
+    margin: 20px 0 0; padding: 13px 16px; font-size: 13.5px; color: var(--ink-mid);
+    background: color-mix(in srgb, var(--dc) 7%, transparent);
+    border-radius: 10px;
+  }
+  .quote::before { content: "“"; color: var(--dc); font-weight: 700; margin-right: 2px; }
+  .quote::after { content: "”"; color: var(--dc); font-weight: 700; margin-left: 2px; }
+
+  footer {
+    margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line);
+    font-size: 12px; color: var(--ink-soft);
+  }
+  footer p { margin: 0 0 4px; }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Book Map</p>
+  <h1>エンジニアのための自己管理入門</h1>
+  <p class="tagline">— セルフマネジメントが、キャリアをつくる —</p>
+  <div class="meta">
+    <span>翔泳社</span>
+    <span>2026年6月24日 発売</span>
+    <span>小田中育生（dora_e_m）</span>
+    <span>全5章＋終章</span>
+    <span>各章末に エンジニア視点 / マネージャー視点 Tips</span>
+  </div>
+</header>
+
+<div class="cols">
+  <!-- ============ 左：構造マップ ============ -->
+  <div>
+    <p class="hint">章をクリックすると、その章の中身がわかります</p>
+
+    <button class="bookend" data-key="intro" aria-pressed="false" style="--be: var(--c0)">
+      <span class="bk-label">はじめに</span><br>
+      <span class="bk-title">セルフマネジメントがキャリアをつくる</span><br>
+      <span class="bk-sub">なぜ、いま自己管理なのか</span>
+    </button>
+    <div class="connector"></div>
+
+    <svg class="map" viewBox="0 0 520 500" role="group" aria-label="第1章から第5章の関係図">
+      <circle class="hub-ring" cx="260" cy="250" r="176"/>
+      <g id="spokes"></g>
+
+      <circle class="hub-disc" cx="260" cy="250" r="76"/>
+      <text class="hub-t1" x="260" y="228">SELF MANAGEMENT</text>
+      <text class="hub-t2" x="260" y="250">自分のハンドルを</text>
+      <text class="hub-t2" x="260" y="269">握る</text>
+      <text class="hub-t3" x="260" y="290">5つの軸が噛み合う</text>
+
+      <g id="nodes"></g>
+    </svg>
+
+    <div class="connector"></div>
+    <button class="bookend" data-key="final" aria-pressed="false" style="--be: var(--c6)">
+      <span class="bk-label">終章</span><br>
+      <span class="bk-title">セルフマネジメントがチームを強くする</span><br>
+      <span class="bk-sub">「個」を整えると、チームが動き出す</span>
+    </button>
+    <div class="connector"></div>
+    <button class="bookend" data-key="appendix" aria-pressed="false" style="--be: var(--c0)">
+      <span class="bk-label">巻末付録</span><br>
+      <span class="bk-title">読後30日アクションプラン</span><br>
+      <span class="bk-sub">読んで終わりにしないための30日分</span>
+    </button>
+  </div>
+
+  <!-- ============ 右：詳細 ============ -->
+  <div>
+    <article class="detail" id="detail" aria-live="polite"></article>
+  </div>
+</div>
+
+<footer>
+  <p>『エンジニアのための自己管理入門』（翔泳社・2026年6月24日発売／小田中育生 著）の章構成マップです。掲載内容は書籍の一部を要約したものです。</p>
+  <p>イラスト：北川ともあきさん／編集：小田倉怜央さん</p>
+  <p><a href="https://www.shoeisha.co.jp/book/" rel="noopener">翔泳社の書籍ページ</a></p>
+</footer>
+
+</div>
+
+<script>
+const CHAPTERS = [
+  {
+    key: "ch1", n: 1, color: "var(--c1)",
+    label: "第 1 章", short: "モチベーション",
+    title: "モチベーションマネジメント",
+    catch: "ワクワクを燃料に、成長ループを回す",
+    lead: "モチベーションは「上がるもの」ではなく<strong>「取り扱うもの」</strong>。精神論ではなく、成果の“質”を左右する土台として扱います。",
+    when: ["やる気が出ない", "何のために頑張っているか見えない"],
+    points: [
+      ["量ではなく「質」に効く", "決められた作業をこなすだけならモチベーションはあまり効かない。正解のない問いを解き、学び続け、協働する仕事だからこそ燃料が要る。"],
+      ["源泉は人それぞれ、状況でも変わる", "内発（好奇心・成長実感・意味・自律）と外発（報酬・承認・評価）。ERG理論のとおり、置かれた状況でも引っぱられる欲求は動く。"],
+      ["サイクルとして設計する", "目的 → 誘引 → 摩擦 → ふりかえり。上がるのを待つのではなく、続く仕組みをつくる。"],
+      ["明日からのTips", "欲求を言葉にする／個人OKRに自分のWillを紐づける／小さなWinを設計する。"]
+    ],
+    tags: ["内発的動機", "外発的動機", "ERG理論", "個人OKR", "小さなWin"]
+  },
+  {
+    key: "ch2", n: 2, color: "var(--c2)",
+    label: "第 2 章", short: "タスク・タイム",
+    title: "タスク・タイムマネジメント",
+    catch: "余白をデザインする技術",
+    lead: "タイムマネジメントは時間術ではなく<strong>「余白のデザイン」</strong>。燃料があっても、道が渋滞していれば前に進めません。",
+    when: ["時間が奪われている", "一日終わって何もやり遂げていない"],
+    points: [
+      ["道が渋滞する3つの要因", "予定で埋め尽くされた一日／兼務によるスイッチングコスト／止まらないチャットの割り込み。"],
+      ["時間どろぼうは、外からも内からも来る", "外＝あなぼこ小僧・ピコピコ忍者・ツァイガルニク夫。内＝居座りゴブリン・スクロール魔女・チリ積婆。"],
+      ["退治法は2系統", "外には環境設計（通知オフの時間・カレンダーのデフラグ・WIP＝1）、内には習慣設計（タイムボクシング・タスクの細分化・やめる勇気）。"],
+      ["リソース効率 vs フロー効率", "稼働率100%を追うと変化で一気に詰まる。WIPを絞り余白を残すほうが、長距離では結果として速い。"],
+      ["余白が生む3つの価値", "変化への適応／創造性の獲得／燃え尽きの回避。生まれた余白を、また新しいタスクで埋めない。"],
+      ["本にある武器", "GTD（5ステップ）／アイゼンハワーマトリクス／移譲（6ステップ）。"]
+    ],
+    tags: ["余白のデザイン", "WIP", "フロー効率", "カレンダーのデフラグ", "GTD", "アイゼンハワーマトリクス"],
+    quote: "余白は怠惰ではない。変化に追随するための投資である（T. デマルコ『ゆとりの法則』）"
+  },
+  {
+    key: "ch3", n: 3, color: "var(--c3)",
+    label: "第 3 章", short: "アンガー・ストレス",
+    title: "アンガー・ストレスマネジメント",
+    catch: "ゴキゲンと、しなやかな回復力",
+    lead: "怒りとストレスは表裏一体。<strong>短期の感情の反応</strong>と<strong>中長期の心身の状態</strong>、どちらも「自己調整」という同じゴールを向いています。",
+    when: ["イライラしやすい", "燃え尽きそう", "休んでも回復しない"],
+    points: [
+      ["怒りは二次感情である", "怒りの前には必ず一次感情がある。悲しみ・失望・不安・無力感。だから問う——「怒りの奥で、何が傷ついた？」"],
+      ["感情の出どころを探る", "ABC理論で出来事と受け取り方を切り分け、リフレーミングで捉え直す。突き動かされそうなら、まず6秒待つ。"],
+      ["コーピングは2種類", "問題焦点型（優先度の見直し・話し合い・リソース調整）と情動焦点型（深呼吸・音楽・雑談・書き出す）。高ぶっているときは、まず情動焦点型から。"],
+      ["レジリエンスは鋼ではなく、竹", "何があっても動じない強さではなく、辛さや失敗を認めたうえで元に戻れるしなやかさ。"],
+      ["ゴキゲンは戦略である", "拡張形成理論のとおり、ポジティブ感情は思考と行動の幅を広げる。心理的安全性は“ぬるま湯”ではなく、率直に話し健全に衝突できる土壌。"],
+      ["燃え尽きの兆候を知る", "消耗／シニシズム／効力感の低下。効率化したのに消耗している人ほど、ここが効く。"]
+    ],
+    tags: ["二次感情", "6秒ルール", "ABC理論", "リフレーミング", "コーピング", "レジリエンス", "拡張形成理論"]
+  },
+  {
+    key: "ch4", n: 4, color: "var(--c4)",
+    label: "第 4 章", short: "スキル",
+    title: "スキルマネジメント",
+    catch: "学び続ける姿勢を整える",
+    lead: "私たちは学び続ける生き物。ただし<strong>成長は直線ではありません</strong>。停滞も不安も、進んでいる証として扱えるようにします。",
+    when: ["学びが積み上がらない", "手応えがない", "AIに頼ると学べない気がする"],
+    points: [
+      ["プラトー（高原状態）も成長の一部", "成果は出ているのに手応えがない時期は誰にでも訪れる。学ぶほど、知らないことが増えていく。"],
+      ["学習の5段階で現在地を知る", "無意識的無能 → 意識的無能 → 意識的有能 → 無意識的有能 → 伝授可能な熟達。段階が上がるほど自信は揺らぐ（ダニング＝クルーガー効果）。"],
+      ["AI時代こそ「なんで動くんだっけ？」", "答えが速く手に入るからこそ、問いを立てる側に回る。"],
+      ["成長を仕組み化する", "把握 → 目標 → 実践 → ふりかえり。"],
+      ["学びを阻む8つの壁", "忙しさ／情報過多／人間関係／変化への抵抗／感情／意味づけ／エネルギー／組織文化。この壁を越えるとき、第1〜3章のマネジメントが効いてくる。"]
+    ],
+    tags: ["プラトー", "学習の5段階", "ダニング＝クルーガー効果", "ふりかえり", "8つの壁"]
+  },
+  {
+    key: "ch5", n: 5, color: "var(--c5)",
+    label: "第 5 章", short: "キャリア",
+    title: "キャリアマネジメント",
+    catch: "羅針盤を片手に、自分の旅路を歩む",
+    lead: "キャリアは固定された目的地ではなく、<strong>進む過程で形を変える生きた羅針盤</strong>。「10年後どうなりたいか」に詰まる人のための章です。",
+    when: ["この先どうしたいか分からない", "転職・役割変更で軸が揺らいでいる"],
+    points: [
+      ["キャリアを描く、2つの型", "山登り型（目標から逆算し計画的に登る）と川下り型（流れに乗り、訪れた機会を掴む）。優劣はなく、フェーズによって行き来する。"],
+      ["偶然をチャンスに変える5つの行動特性", "計画的偶発性理論（Krumboltzら）— 好奇心・持続性・柔軟性・楽観性・リスクを取る。偶然は待っていても訪れない。"],
+      ["キャリアの軸は、自分の中にある", "スキル（Can）／価値観（大切にしたいこと）／動機（Will）。方向が途中で変わるのは、悪いことじゃない。"],
+      ["他者との関わりが形をつくる", "マネージングアップ、正統的周辺参加。キャリアは一人では織り上がらない。"],
+      ["立てて、定期点検する", "キャリアのOKRを置き、シングルループ／ダブルループで見直す。"]
+    ],
+    tags: ["山登り型", "川下り型", "計画的偶発性理論", "Will/Can/価値観", "マネージングアップ", "キャリアOKR"],
+    quote: "キャリアは積み上げるものではなく、織り上げるもの"
+  }
+];
+
+const EXTRAS = {
+  intro: {
+    key: "intro", color: "var(--c0)", label: "はじめに",
+    title: "セルフマネジメントがキャリアをつくる",
+    catch: "なぜ、いま自己管理なのか",
+    lead: "セルフマネジメントとは、<strong>「自分のハンドルを握ること」</strong>。揺れる日があることも含めて受け止めたうえで、自分を観察し、整え、進みたい方向へ戻っていけるようにすることです。",
+    when: ["忙しいのに前に進んでいる実感がない", "やらなければ、に追われている"],
+    points: [
+      ["消耗の正体は、忙しさそのものではない", "忙しさだけが原因なら、効率化や時短術でどうにかなったはず。効くのは「自分で選んでいる感覚が持てない」ほうの消耗。"],
+      ["自律を手放すと、燃え尽きに近づく", "他律的な働き方 → 過度な適応努力 → 心理的消耗 → バーンアウト。この流れを断つのがセルフマネジメント。"],
+      ["価値を生む「一生懸命」でありたい", "稼働率・「ねばならない」・焦りで走る一生懸命ではなく、ゴールにコミットし余白を確保する一生懸命へ。"],
+      ["起点は自己理解", "ジョハリの窓で「開放の窓」を広げ、無意識に大事にしている価値観を言葉にするところから。"]
+    ],
+    tags: ["自分のハンドル", "自律", "バーンアウト", "ジョハリの窓"]
+  },
+  final: {
+    key: "final", color: "var(--c6)", label: "終 章",
+    title: "セルフマネジメントがチームを強くする",
+    catch: "「個」を整えると、チームが動き出す",
+    lead: "自分のハンドルを握れる人が集まると、チームは<strong>自ら動くチーム</strong>に変わる。個人の技術で終わらせず、チーム文化まで描くのが本書の特徴です。",
+    when: ["チームに「整える文化」を作りたいEM・リーダー", "メンバーに自分の整え方を伝えたい人"],
+    points: [
+      ["5つの軸は、そのままチームに波及する", "モチベ＝「やらされる」が消える／余白＝変化への対応力と創造性／感情＝健全な衝突が学びに転化／学び＝暗黙知が組織の資産に／キャリア＝一人ひとりの軸がチームの多様性を支える。"],
+      ["自己管理型チームという考え方", "スクラムガイド2020の「自己管理型チーム」。チームもまた一つの「個」として整えられる。"],
+      ["チームの自己管理力を高める", "ワーキングアグリーメント／ラーニングセッション／ふりかえり。"],
+      ["ゴキゲンは伝染する", "マネージャーの状態が、そのままチームの状態をつくる。だから、まず自分を整える。"]
+    ],
+    tags: ["自己管理型チーム", "ワーキングアグリーメント", "ふりかえり", "心理的安全性"]
+  },
+  appendix: {
+    key: "appendix", color: "var(--c0)", label: "巻末付録",
+    title: "読後30日アクションプラン",
+    catch: "読んで終わりにしないための30日分",
+    lead: "巻末に<strong>30日分の具体アクション</strong>を収録。「今日から」を「続く」に変えるための仕掛けです。",
+    when: ["読んだのに何も変わらなかった経験がある"],
+    points: [
+      ["パーソナルユーザーストーリー", "自分を「ユーザー」として捉え、自分への要望を書き出す。"],
+      ["ムービングモチベーター", "何が自分を動かすのかを、カードで可視化する。"],
+      ["満足ヒストグラム", "チームの満足度を見える化する。"],
+      ["各章末のTipsとセットで", "エンジニア視点／マネージャー視点のTipsが章末にあり、自分の立場に合わせて取り入れられる。"]
+    ],
+    tags: ["30日", "パーソナルユーザーストーリー", "ムービングモチベーター", "満足ヒストグラム"]
+  }
+};
+
+/* ---------- SVG map generation ---------- */
+const CX = 260, CY = 250, R = 176, NR = 57;
+const spokesEl = document.getElementById("spokes");
+const nodesEl  = document.getElementById("nodes");
+const NS = "http://www.w3.org/2000/svg";
+
+CHAPTERS.forEach((ch, i) => {
+  const a = (-90 + i * 72) * Math.PI / 180;
+  const x = CX + R * Math.cos(a), y = CY + R * Math.sin(a);
+
+  const line = document.createElementNS(NS, "line");
+  line.setAttribute("class", "spoke");
+  line.setAttribute("x1", CX + 76 * Math.cos(a));
+  line.setAttribute("y1", CY + 76 * Math.sin(a));
+  line.setAttribute("x2", x - NR * Math.cos(a));
+  line.setAttribute("y2", y - NR * Math.sin(a));
+  line.style.setProperty("--nc", ch.color);
+  line.dataset.key = ch.key;
+  spokesEl.appendChild(line);
+
+  const g = document.createElementNS(NS, "g");
+  g.setAttribute("class", "node");
+  g.setAttribute("tabindex", "0");
+  g.setAttribute("role", "button");
+  g.setAttribute("aria-label", ch.label + " " + ch.title);
+  g.style.setProperty("--nc", ch.color);
+  g.dataset.key = ch.key;
+
+  const c = document.createElementNS(NS, "circle");
+  c.setAttribute("class", "disc");
+  c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", NR);
+  g.appendChild(c);
+
+  const t1 = document.createElementNS(NS, "text");
+  t1.setAttribute("class", "num"); t1.setAttribute("x", x); t1.setAttribute("y", y - 16);
+  t1.textContent = "CH." + ch.n;
+  g.appendChild(t1);
+
+  ch.short.split("・").forEach((part, k, arr) => {
+    const t = document.createElementNS(NS, "text");
+    t.setAttribute("class", "name");
+    t.setAttribute("x", x);
+    t.setAttribute("y", y + 6 + k * 17 - (arr.length - 1) * 8);
+    t.textContent = arr.length > 1 && k < arr.length - 1 ? part + "・" : part;
+    g.appendChild(t);
+  });
+
+  nodesEl.appendChild(g);
+});
+
+/* ---------- rendering ---------- */
+const ALL = {};
+CHAPTERS.forEach(c => ALL[c.key] = c);
+Object.assign(ALL, EXTRAS);
+
+const detail = document.getElementById("detail");
+
+function render(key) {
+  const d = ALL[key];
+  detail.style.setProperty("--dc", d.color);
+  detail.innerHTML = `
+    <p class="d-label">${d.label}</p>
+    <h2 class="d-title">${d.title}</h2>
+    <p class="d-catch">${d.catch}</p>
+    <p class="d-lead">${d.lead}</p>
+
+    <p class="d-h">こんなときに開く</p>
+    <ul class="chips">${d.when.map(w => `<li>${w}</li>`).join("")}</ul>
+
+    <p class="d-h">この章で扱うこと</p>
+    <ul class="points">${d.points.map(([h, b]) => `<li><b>${h}</b><span>${b}</span></li>`).join("")}</ul>
+
+    ${d.quote ? `<p class="quote">${d.quote}</p>` : ""}
+
+    <p class="d-h">キーワード</p>
+    <ul class="tags">${d.tags.map(t => `<li>${t}</li>`).join("")}</ul>
+  `;
+
+  document.querySelectorAll(".node").forEach(n =>
+    n.classList.toggle("is-active", n.dataset.key === key));
+  document.querySelectorAll(".spoke").forEach(s =>
+    s.classList.toggle("is-active", s.dataset.key === key));
+  document.querySelectorAll(".bookend").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.key === key)));
+}
+
+document.querySelectorAll(".node, .bookend").forEach(el => {
+  el.addEventListener("click", () => render(el.dataset.key));
+  el.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); render(el.dataset.key); }
+  });
+});
+
+render("intro");
+</script>
+</body>
+</html>
