@@ -3,7 +3,7 @@
 書籍『[エンジニアのための自己管理入門](https://www.shoeisha.co.jp/book/)』（翔泳社・2026年6月24日発売／小田中育生 著）の
 章構成を、クリックして辿れるマップにしたものです。
 
-**公開URL**: <!-- GitHub Pages 有効化後にURLを記載 -->
+**公開URL**: https://ikuoodanaka.github.io/self-management-book-map/
 
 ## これは何か
 
