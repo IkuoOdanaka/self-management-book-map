@@ -1,0 +1,42 @@
+name: 感想・フィードバック
+description: 本書またはこのサイトへの感想や、掲載候補を送る
+title: "[Feedback] "
+labels:
+  - feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        フィードバックをありがとうございます。
+        いただいた内容の掲載・修正の採否と最終的な表現は、リポジトリオーナーが判断します。
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 種類
+      options:
+        - 本書への感想
+        - 感想ブログの掲載依頼
+        - SNS投稿の掲載依頼
+        - サイトへの改善提案
+    validations:
+      required: true
+  - type: textarea
+    id: feedback
+    attributes:
+      label: フィードバック
+      description: 感じたことや提案内容を記載してください。
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: 原文URL
+      description: ブログやSNS投稿の掲載依頼の場合は、公開された原文URLを記載してください。
+      placeholder: https://...
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: 確認
+      options:
+        - label: 掲載の採否と最終的な表現はリポジトリオーナーが判断することを了解します。
+          required: true

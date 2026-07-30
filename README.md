@@ -82,3 +82,8 @@ Amazonアソシエイトのタグは冒頭の `AMAZON_TAG` にあります。
 
 コードは MIT License（[LICENSE](LICENSE)）。
 掲載している書籍の内容・要約文は書籍の著作物であり、MITの対象外です。
+
+## フィードバック
+
+本書やサイトへの感想、掲載候補、改善提案をIssueとPull Requestで受け付けています。
+詳細は [CONTRIBUTING.md](CONTRIBUTING.md) をご覧ください。
