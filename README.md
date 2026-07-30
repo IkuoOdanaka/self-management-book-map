@@ -47,6 +47,7 @@ open index.html
 
 ```
 index.html   すべて（HTML / CSS / JS / データ）がこの1ファイルに入っています
+og-image.png SNS共有時に表示するOGP画像（1200×630px）
 ```
 
 章のデータは `index.html` 内の `CHAPTERS` 配列と `EXTRAS` オブジェクトにあります。
