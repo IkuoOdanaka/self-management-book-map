@@ -250,10 +250,160 @@
   }
   footer p { margin: 0 0 4px; }
   footer a { color: var(--accent); }
+
+  /* ---------- 2026 editorial redesign ---------- */
+  body {
+    background:
+      linear-gradient(90deg, rgba(22,37,43,.035) 1px, transparent 1px) 0 0 / 32px 32px,
+      var(--bg);
+  }
+  .wrap { max-width: 1240px; padding-top: 0; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 64px; border-bottom: 1px solid var(--line);
+  }
+  .brand { font-size: 12px; font-weight: 800; letter-spacing: .18em; color: var(--ink); }
+  .toplinks { display: flex; gap: 18px; align-items: center; }
+  .toplinks a { color: var(--ink-mid); font-size: 12px; font-weight: 600; text-decoration: none; }
+  .toplinks a:last-child { color: var(--accent); }
+  header { border: 0; margin: 0; padding: 48px 0 54px; }
+  .hero { grid-template-columns: minmax(0,1fr) 240px; gap: clamp(32px, 7vw, 92px); align-items: center; }
+  .hero-cover { grid-column: 2; grid-row: 1; transform: rotate(2deg); }
+  .hero-body { grid-column: 1; grid-row: 1; }
+  .hero-cover img { border-radius: 2px; }
+  .eyebrow { font-size: 12px; color: var(--accent); }
+  h1 { max-width: 800px; font-size: clamp(38px, 6vw, 72px); line-height: 1.08; letter-spacing: -.045em; }
+  .tagline { max-width: 650px; margin: 18px 0 24px; font-size: clamp(15px, 2vw, 19px); color: var(--ink-mid); }
+  .meta span { border: 0; padding: 0; }
+  .meta span + span::before { content: "/"; margin-right: 10px; color: var(--line-strong); }
+  .btn { border-radius: 3px; padding: 10px 18px; }
+  .btn-primary { box-shadow: 4px 4px 0 var(--ink); }
+
+  .explorer {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 22px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .explorer-head {
+    display: grid; grid-template-columns: .8fr 1.2fr; gap: 40px;
+    padding: 38px 42px 34px; background: var(--cover); color: #102d33;
+  }
+  .section-kicker { margin: 0 0 8px; font-size: 11px; font-weight: 800; letter-spacing: .18em; }
+  .explorer-head h2 { margin: 0; font-size: clamp(27px, 4vw, 43px); line-height: 1.2; letter-spacing: -.035em; }
+  .explorer-head p { margin: 5px 0 0; align-self: end; font-size: 14px; max-width: 520px; }
+  .interest-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border-bottom: 1px solid var(--line);
+  }
+  .interest-card {
+    min-height: 128px; padding: 22px; border: 0; background: var(--panel);
+    color: var(--ink); text-align: left; cursor: pointer; font: inherit;
+    transition: background .15s, color .15s;
+  }
+  .interest-card:hover, .interest-card.is-active { background: var(--ink); color: #fff; }
+  .interest-card small { display: block; color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+  .interest-card strong { display: block; margin-top: 13px; font-size: 16px; line-height: 1.5; }
+  .interest-card span { display: block; margin-top: 6px; opacity: .66; font-size: 12px; }
+  .chapter-nav {
+    display: flex; gap: 8px; padding: 16px 20px; overflow-x: auto;
+    border-bottom: 1px solid var(--line); scrollbar-width: thin;
+  }
+  .chapter-tab {
+    flex: 0 0 auto; border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 13px; background: transparent; color: var(--ink-mid);
+    font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .chapter-tab.is-active { color: #fff; background: var(--dc); border-color: var(--dc); }
+  .detail { min-height: 540px; border: 0; border-radius: 0; box-shadow: none; padding: 42px; }
+  .detail-top { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(240px, .85fr); gap: 46px; }
+  .detail-summary { position: sticky; top: 20px; align-self: start; }
+  .d-title { font-size: clamp(25px, 4vw, 42px); line-height: 1.2; letter-spacing: -.03em; }
+  .d-catch { font-size: 15px; }
+  .d-lead { font-size: 15px; }
+  .points { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1px; background: var(--line); }
+  .points li { padding: 18px; border: 0; background: var(--panel); }
+  .detail-more summary {
+    cursor: pointer; margin-top: 24px; padding: 13px 0; border-top: 1px solid var(--line);
+    color: var(--dc); font-size: 13px; font-weight: 700;
+  }
+  .feedback { margin-top: 64px; }
+  .feedback-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .feedback-grid.social { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .feedback-card:first-child { grid-column: span 2; background: var(--ink); color: #fff; }
+  .feedback-card:first-child blockquote, .feedback-card:first-child .feedback-by { color: rgba(255,255,255,.72); }
+  .interest-card:focus-visible, .chapter-tab:focus-visible, .btn:focus-visible,
+  .detail-more summary:focus-visible, .toplinks a:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px;
+  }
+  @media (prefers-color-scheme: dark) {
+    body {
+      background:
+        linear-gradient(90deg, rgba(100,196,210,.045) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bg);
+    }
+    .btn-primary {
+      background: var(--cover); border-color: var(--cover); color: #102d33;
+      box-shadow: 4px 4px 0 #050b0d;
+    }
+    .interest-card:hover, .interest-card.is-active {
+      background: #20383f; color: #f4fbfc;
+      box-shadow: inset 0 -4px 0 var(--cover);
+    }
+    .interest-card:hover small, .interest-card.is-active small { color: #8bd9e3; }
+    .interest-card:hover span, .interest-card.is-active span { opacity: .82; }
+    .chapter-tab.is-active { color: #102026; }
+    .chips li {
+      background: color-mix(in srgb, var(--dc) 17%, var(--panel));
+      color: color-mix(in srgb, var(--dc) 88%, white);
+    }
+    .quote { background: color-mix(in srgb, var(--dc) 12%, var(--panel)); }
+    .feedback-card:first-child {
+      background: #0a1519; border-color: #33505a; color: #f4fbfc;
+    }
+    .feedback-card:first-child blockquote,
+    .feedback-card:first-child .feedback-by { color: #b8cbd1; }
+    .feedback-card:first-child .feedback-source,
+    .feedback-card:first-child .feedback-go { color: #7dd3de; }
+  }
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr 140px; gap: 24px; }
+    .interest-grid { grid-template-columns: repeat(2, 1fr); }
+    .explorer-head, .detail-top { grid-template-columns: 1fr; gap: 18px; }
+    .detail-summary { position: static; }
+    .feedback-grid, .feedback-grid.social { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 14px 50px; }
+    .toplinks a:not(:last-child) { display: none; }
+    header { padding: 34px 0 40px; }
+    .hero { grid-template-columns: 92px 1fr; align-items: start; }
+    .hero-cover { grid-column: 1; grid-row: 1; transform: rotate(-2deg); }
+    .hero-body { grid-column: 2; grid-row: 1; }
+    h1 { font-size: 29px; }
+    .tagline { font-size: 13px; margin: 10px 0 14px; }
+    .meta { display: none; }
+    .cta .btn:not(.btn-primary) { display: none; }
+    .explorer-head { padding: 26px 22px; }
+    .interest-grid { grid-template-columns: 1fr; }
+    .interest-card { min-height: 98px; padding: 18px 22px; }
+    .interest-card strong { margin-top: 7px; }
+    .detail { padding: 28px 22px; }
+    .points { grid-template-columns: 1fr; }
+    .feedback-grid, .feedback-grid.social { grid-template-columns: 1fr; }
+    .feedback-card:first-child { grid-column: span 1; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
+
+<nav class="topbar" aria-label="ページ内ナビゲーション">
+  <span class="brand">SELF MANAGEMENT / BOOK MAP</span>
+  <span class="toplinks">
+    <a href="#explore">章を探す</a>
+    <a href="#feedback">読者の声</a>
+    <a href="https://www.shoeisha.co.jp/book/detail/9784798194066" rel="noopener">書籍情報 ↗</a>
+  </span>
+</nav>
 
 <header>
   <div class="hero">
@@ -282,50 +432,18 @@
   </div>
 </header>
 
-<div class="cols">
-  <!-- ============ 左：構造マップ ============ -->
-  <div>
-    <p class="hint">章をクリックすると、その章の中身がわかります</p>
-
-    <button class="bookend" data-key="intro" aria-pressed="false" style="--be: var(--c0)">
-      <span class="bk-label">はじめに</span><br>
-      <span class="bk-title">セルフマネジメントがキャリアをつくる</span><br>
-      <span class="bk-sub">なぜ、いま自己管理なのか</span>
-    </button>
-    <div class="connector"></div>
-
-    <svg class="map" viewBox="0 0 520 500" role="group" aria-label="第1章から第5章の関係図">
-      <circle class="hub-ring" cx="260" cy="250" r="176"/>
-      <g id="spokes"></g>
-
-      <circle class="hub-disc" cx="260" cy="250" r="76"/>
-      <text class="hub-t1" x="260" y="228">SELF MANAGEMENT</text>
-      <text class="hub-t2" x="260" y="250">自分のハンドルを</text>
-      <text class="hub-t2" x="260" y="269">握る</text>
-      <text class="hub-t3" x="260" y="290">5つの軸が噛み合う</text>
-
-      <g id="nodes"></g>
-    </svg>
-
-    <div class="connector"></div>
-    <button class="bookend" data-key="final" aria-pressed="false" style="--be: var(--c6)">
-      <span class="bk-label">終章</span><br>
-      <span class="bk-title">セルフマネジメントがチームを強くする</span><br>
-      <span class="bk-sub">「個」を整えると、チームが動き出す</span>
-    </button>
-    <div class="connector"></div>
-    <button class="bookend" data-key="appendix" aria-pressed="false" style="--be: var(--c0)">
-      <span class="bk-label">巻末付録</span><br>
-      <span class="bk-title">読後30日アクションプラン</span><br>
-      <span class="bk-sub">読んで終わりにしないための30日分</span>
-    </button>
+<main class="explorer" id="explore">
+  <div class="explorer-head">
+    <div>
+      <p class="section-kicker">FIND YOUR CHAPTER</p>
+      <h2>いまの自分から、<br>読む章を選ぶ。</h2>
+    </div>
+    <p>この本は、最初から順に読む必要はありません。いちばん気になっていることを選ぶと、入口になる章をご案内します。</p>
   </div>
-
-  <!-- ============ 右：詳細 ============ -->
-  <div>
-    <article class="detail" id="detail" aria-live="polite"></article>
-  </div>
-</div>
+  <div class="interest-grid" id="interestGrid" aria-label="興味や悩みから章を選ぶ"></div>
+  <nav class="chapter-nav" id="chapterNav" aria-label="目次から章を選ぶ"></nav>
+  <article class="detail" id="detail" aria-live="polite"></article>
+</main>
 
 <section class="feedback" id="feedback" aria-labelledby="feedback-title">
   <div class="feedback-head">
@@ -612,62 +730,32 @@ const EXTRAS = {
   }
 };
 
-/* ---------- SVG map generation ---------- */
-const CX = 260, CY = 250, R = 176, NR = 57;
-const spokesEl = document.getElementById("spokes");
-const nodesEl  = document.getElementById("nodes");
-const NS = "http://www.w3.org/2000/svg";
-
-CHAPTERS.forEach((ch, i) => {
-  const a = (-90 + i * 72) * Math.PI / 180;
-  const x = CX + R * Math.cos(a), y = CY + R * Math.sin(a);
-
-  const line = document.createElementNS(NS, "line");
-  line.setAttribute("class", "spoke");
-  line.setAttribute("x1", CX + 76 * Math.cos(a));
-  line.setAttribute("y1", CY + 76 * Math.sin(a));
-  line.setAttribute("x2", x - NR * Math.cos(a));
-  line.setAttribute("y2", y - NR * Math.sin(a));
-  line.style.setProperty("--nc", ch.color);
-  line.dataset.key = ch.key;
-  spokesEl.appendChild(line);
-
-  const g = document.createElementNS(NS, "g");
-  g.setAttribute("class", "node");
-  g.setAttribute("tabindex", "0");
-  g.setAttribute("role", "button");
-  g.setAttribute("aria-label", ch.label + " " + ch.title);
-  g.style.setProperty("--nc", ch.color);
-  g.dataset.key = ch.key;
-
-  const c = document.createElementNS(NS, "circle");
-  c.setAttribute("class", "disc");
-  c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", NR);
-  g.appendChild(c);
-
-  const t1 = document.createElementNS(NS, "text");
-  t1.setAttribute("class", "num"); t1.setAttribute("x", x); t1.setAttribute("y", y - 16);
-  t1.textContent = "CH." + ch.n;
-  g.appendChild(t1);
-
-  ch.short.split("・").forEach((part, k, arr) => {
-    const t = document.createElementNS(NS, "text");
-    t.setAttribute("class", "name");
-    t.setAttribute("x", x);
-    t.setAttribute("y", y + 6 + k * 17 - (arr.length - 1) * 8);
-    t.textContent = arr.length > 1 && k < arr.length - 1 ? part + "・" : part;
-    g.appendChild(t);
-  });
-
-  nodesEl.appendChild(g);
-});
-
 /* ---------- rendering ---------- */
 const ALL = {};
 CHAPTERS.forEach(c => ALL[c.key] = c);
 Object.assign(ALL, EXTRAS);
 
 const detail = document.getElementById("detail");
+const interestGrid = document.getElementById("interestGrid");
+const chapterNav = document.getElementById("chapterNav");
+const INTERESTS = [
+  { key: "ch1", label: "01 / ENERGY", title: "やる気の波を、味方につけたい", note: "モチベーション" },
+  { key: "ch2", label: "02 / SPACE", title: "忙しさから、余白を取り戻したい", note: "タスク・時間" },
+  { key: "ch3", label: "03 / RECOVERY", title: "イライラや消耗から、回復したい", note: "感情・ストレス" },
+  { key: "ch4", label: "04 / GROWTH", title: "学びを、手応えにつなげたい", note: "スキル・成長" },
+  { key: "ch5", label: "05 / DIRECTION", title: "これからの道を、自分で選びたい", note: "キャリア" },
+  { key: "final", label: "06 / TEAM", title: "自律して動くチームをつくりたい", note: "マネジメント" }
+];
+
+interestGrid.innerHTML = INTERESTS.map(item => `
+  <button class="interest-card" data-key="${item.key}" type="button">
+    <small>${item.label}</small><strong>${item.title}</strong><span>${item.note} →</span>
+  </button>`).join("");
+
+const NAV_ITEMS = [EXTRAS.intro, ...CHAPTERS, EXTRAS.final, EXTRAS.appendix];
+chapterNav.innerHTML = NAV_ITEMS.map(item => `
+  <button class="chapter-tab" data-key="${item.key}" type="button">${item.label} ${item.short || ""}</button>
+`).join("");
 
 function renderRefs(key) {
   const list = REFS[key] || [];
@@ -690,41 +778,40 @@ function render(key) {
   const d = ALL[key];
   detail.style.setProperty("--dc", d.color);
   detail.innerHTML = `
-    <p class="d-label">${d.label}</p>
-    <h2 class="d-title">${d.title}</h2>
-    <p class="d-catch">${d.catch}</p>
-    <p class="d-lead">${d.lead}</p>
-
-    <p class="d-h">こんなときに開く</p>
-    <ul class="chips">${d.when.map(w => `<li>${w}</li>`).join("")}</ul>
-
-    <p class="d-h">この章で扱うこと</p>
-    <ul class="points">${d.points.map(([h, b]) => `<li><b>${h}</b><span>${b}</span></li>`).join("")}</ul>
-
-    ${d.quote ? `<p class="quote">${d.quote}</p>` : ""}
-
-    <p class="d-h">キーワード</p>
-    <ul class="tags">${d.tags.map(t => `<li>${t}</li>`).join("")}</ul>
-
-    ${renderRefs(key)}
+    <div class="detail-top">
+      <div class="detail-summary">
+        <p class="d-label">${d.label}</p>
+        <h2 class="d-title">${d.title}</h2>
+        <p class="d-catch">${d.catch}</p>
+        <p class="d-lead">${d.lead}</p>
+        <p class="d-h">こんなときに開く</p>
+        <ul class="chips">${d.when.map(w => `<li>${w}</li>`).join("")}</ul>
+        ${d.quote ? `<p class="quote">${d.quote}</p>` : ""}
+      </div>
+      <div>
+        <p class="d-h">この章で扱うこと</p>
+        <ul class="points">${d.points.map(([h, b]) => `<li><b>${h}</b><span>${b}</span></li>`).join("")}</ul>
+        <details class="detail-more">
+          <summary>キーワードと、この章の背景にある本を見る</summary>
+          <ul class="tags">${d.tags.map(t => `<li>${t}</li>`).join("")}</ul>
+          ${renderRefs(key)}
+        </details>
+      </div>
+    </div>
   `;
 
-  document.querySelectorAll(".node").forEach(n =>
-    n.classList.toggle("is-active", n.dataset.key === key));
-  document.querySelectorAll(".spoke").forEach(s =>
-    s.classList.toggle("is-active", s.dataset.key === key));
-  document.querySelectorAll(".bookend").forEach(b =>
-    b.setAttribute("aria-pressed", String(b.dataset.key === key)));
+  document.querySelectorAll(".interest-card, .chapter-tab").forEach(el => {
+    el.classList.toggle("is-active", el.dataset.key === key);
+    el.setAttribute("aria-pressed", String(el.dataset.key === key));
+    if (el.classList.contains("chapter-tab")) el.style.setProperty("--dc", d.color);
+  });
 }
 
-document.querySelectorAll(".node, .bookend").forEach(el => {
+document.querySelectorAll(".interest-card, .chapter-tab").forEach(el => {
   el.addEventListener("click", () => render(el.dataset.key));
-  el.addEventListener("keydown", e => {
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); render(el.dataset.key); }
-  });
 });
 
-render("intro");
+render("ch2");
 </script>
 </body>
 </html>
