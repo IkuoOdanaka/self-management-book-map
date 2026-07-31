@@ -100,7 +100,72 @@
         </a></li>`).join("")}</ul>`;
   }
 
-  function render(key, { scroll = false } = {}) {
+  /* ---------- SNSへの共有 ----------
+     共有されるのは「いま開いている章のURL」です。
+     公開URLは <link rel="canonical"> から取るので、ローカルで開いていても
+     file:// のパスではなく、本番のURLが共有されます。 */
+  const shareEl = byId("share");
+  const canonical = (document.querySelector('link[rel="canonical"]') || {}).href
+    || location.href.split("#")[0];
+  const SHARE = DATA.share || {};
+
+  function renderShare(d) {
+    if (!shareEl) return;
+    shareEl.style.setProperty("--dc", d.color);   // 章の色をボタンのホバーに使う
+    const url = canonical + "#" + d.key;
+    // 「第2章 タスク・タイムマネジメント｜『…』章構成マップ」
+    // ラベルはタブでの見た目のために「第 2 章」と空けているので、文章に載せる際は詰める
+    const label = d.label.replace(/\s+/g, "");
+    const title = `${label} ${d.title}｜${SHARE.siteTitle || document.title}`;
+    const u = encodeURIComponent(url);
+    const t = encodeURIComponent(title);
+    const tag = SHARE.hashtag ? encodeURIComponent(SHARE.hashtag) : "";
+
+    shareEl.innerHTML = `
+      <p class="share-label">この章をシェア</p>
+      <div class="share-btns">
+        <a class="share-btn" target="_blank" rel="noopener"
+           href="https://x.com/intent/post?text=${t}&url=${u}${tag ? "&hashtags=" + tag : ""}">Xでポスト</a>
+        <a class="share-btn" target="_blank" rel="noopener"
+           href="https://b.hatena.ne.jp/add?mode=confirm&url=${u}&title=${t}">はてブに追加</a>
+        <a class="share-btn" target="_blank" rel="noopener"
+           href="https://www.facebook.com/sharer/sharer.php?u=${u}">Facebookでシェア</a>
+        <button class="share-btn" type="button" id="copyLink" data-url="${url}">リンクをコピー</button>
+        <span class="share-done" id="copyDone" role="status" aria-live="polite"></span>
+      </div>`;
+  }
+
+  // コピーは innerHTML の張り替えで要素ごと入れ替わるため、
+  // 個々のボタンではなく親要素で受ける（イベント委譲）。
+  if (shareEl) {
+    shareEl.addEventListener("click", async e => {
+      const btn = e.target.closest("#copyLink");
+      if (!btn) return;
+      const done = byId("copyDone");
+      let ok = false;
+      try {
+        // clipboard API は https（と localhost）でしか使えない。
+        await navigator.clipboard.writeText(btn.dataset.url);
+        ok = true;
+      } catch (_) {
+        // file:// や古い環境向けのフォールバック
+        const ta = document.createElement("textarea");
+        ta.value = btn.dataset.url;
+        ta.setAttribute("readonly", "");
+        ta.style.cssText = "position:fixed;top:-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        try { ok = document.execCommand("copy"); } catch (__) { ok = false; }
+        document.body.removeChild(ta);
+      }
+      if (done) {
+        done.textContent = ok ? "コピーしました" : "コピーできませんでした";
+        setTimeout(() => { done.textContent = ""; }, 2600);
+      }
+    });
+  }
+
+  function render(key, { scroll = false, updateHash = false } = {}) {
     const d = ALL[key];
     if (!d) return;
     detail.style.setProperty("--dc", d.color);
@@ -133,6 +198,14 @@
       if (el.classList.contains("chapter-tab")) el.style.setProperty("--dc", d.color);
     });
 
+    renderShare(d);
+
+    // URLに開いている章を残す。pushState だと章を押すたびに履歴が積もり、
+    // 「戻る」でページを離脱できなくなるので replaceState を使う。
+    if (updateHash && location.hash.slice(1) !== key) {
+      history.replaceState(null, "", "#" + key);
+    }
+
     if (scroll) {
       const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
       requestAnimationFrame(() => detail.scrollIntoView({ behavior, block: "start" }));
@@ -140,10 +213,18 @@
   }
 
   document.querySelectorAll(".interest-card, .chapter-tab").forEach(el => {
-    el.addEventListener("click", () => render(el.dataset.key, { scroll: true }));
+    el.addEventListener("click", () => render(el.dataset.key, { scroll: true, updateHash: true }));
   });
 
-  render(DATA.defaultKey || (DATA.chapters && DATA.chapters[0] && DATA.chapters[0].key));
+  /* ---------- 章ごとのURL ----------
+     #<章キー> で、その章が開いた状態からページが始まります。
+     トップバーの #explore / #feedback は章キーではないので、
+     ここでは何もせず、通常のページ内リンクとして機能します。 */
+  const hashKey = decodeURIComponent(location.hash.slice(1));
+  const startKey = ALL[hashKey] ? hashKey
+    : (DATA.defaultKey || (DATA.chapters && DATA.chapters[0] && DATA.chapters[0].key));
+  // 共有リンクで来た人には、その章まで運ぶ。通常の来訪では冒頭から見せる。
+  render(startKey, { scroll: Boolean(ALL[hashKey]) });
 
   /* ---------- 著者の他の書籍マップ ----------
      books/catalog.js から、いま見ている本以外を並べます。

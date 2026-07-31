@@ -14,6 +14,12 @@ window.BOOK_MAP_DATA = {
   defaultKey: "ch2",          // 最初に開いておく章
   navOrder: ["intro", "ch1", "ch2", "ch3", "ch4", "ch5", "final", "appendix"],
 
+  /* 共有ボタンの文面。実際には「第2章 タスク・タイムマネジメント｜<siteTitle>」の形で送られます */
+  share: {
+    siteTitle: "『エンジニアのための自己管理入門』章構成マップ",
+    hashtag: "エンジニアのための自己管理入門"   // Xのハッシュタグ（# は付けない）
+  },
+
   /* ---------- 興味・悩みからの入口 ---------- */
   interests: [
     { key: "ch1",   label: "01 / ENERGY",    title: "やる気の波を、味方につけたい",     note: "モチベーション" },
