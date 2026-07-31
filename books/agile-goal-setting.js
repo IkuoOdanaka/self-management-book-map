@@ -14,6 +14,13 @@ window.BOOK_MAP_DATA = {
   defaultKey: "step2",        // 最初に開いておく章＝本書の主題
   navOrder: ["intro", "step1", "step2", "step3", "step4", "step5", "step6", "step7", "step8", "columns"],
 
+  /* 共有ボタンの文面。実際には「STEP 2 ワクワクする目標をつくろう｜<siteTitle>」の形で送られます。
+     ハッシュタグは、刊行時に読者が実際に使っていたものに合わせている */
+  share: {
+    siteTitle: "『アジャイルチームによる目標づくりガイドブック』STEP構成マップ",
+    hashtag: "目標づくりガイドブック"   // Xのハッシュタグ（# は付けない）
+  },
+
   /* ---------- 興味・悩みからの入口 ---------- */
   interests: [
     { key: "step1", label: "01 / TRUST",      title: "リーダーになった。まず何から",   note: "チームビルディング" },
