@@ -194,10 +194,18 @@ h1 { max-width: 800px; font-size: clamp(38px, 6vw, 72px); line-height: 1.08; let
 .section-kicker { margin: 0 0 8px; font-size: 11px; font-weight: 800; letter-spacing: .18em; }
 .explorer-head h2 { margin: 0; font-size: clamp(27px, 4vw, 43px); line-height: 1.2; letter-spacing: -.035em; }
 .explorer-head p { margin: 5px 0 0; align-self: end; font-size: 14px; max-width: 520px; }
+/* 入口カードは書籍ごとに枚数が変わる（本編の章数にあわせる）。
+   3枚ずつ並べたときに最終行が余ると、グリッドの下地が穴のように見えてしまうので、
+   6分割を土台にして、余った枚数だけ最後の行を広げて埋める。
+   余り1枚 → その1枚が6列ぶん／余り2枚 → 2枚が3列ぶんずつ。
+   余りは data-rem3（狭い画面では data-rem2）として JS が入れる。 */
 .interest-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px;
   background: var(--line); border-bottom: 1px solid var(--line);
 }
+.interest-card { grid-column: span 2; }
+.interest-grid[data-rem3="1"] .interest-card:last-child { grid-column: span 6; }
+.interest-grid[data-rem3="2"] .interest-card:nth-last-child(-n+2) { grid-column: span 3; }
 .interest-card {
   min-height: 128px; padding: 22px; border: 0; background: var(--panel);
   color: var(--ink); text-align: left; cursor: pointer; font: inherit;
@@ -305,7 +313,12 @@ h1 { max-width: 800px; font-size: clamp(38px, 6vw, 72px); line-height: 1.08; let
 }
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr 140px; gap: 24px; }
-  .interest-grid { grid-template-columns: repeat(2, 1fr); }
+  /* 2枚並び。土台は4分割にして、余った1枚が行全体を埋める */
+  .interest-grid { grid-template-columns: repeat(4, 1fr); }
+  .interest-card,
+  .interest-grid[data-rem3="1"] .interest-card:last-child,
+  .interest-grid[data-rem3="2"] .interest-card:nth-last-child(-n+2) { grid-column: span 2; }
+  .interest-grid[data-rem2="1"] .interest-card:last-child { grid-column: span 4; }
   .explorer-head, .detail-top { grid-template-columns: 1fr; gap: 18px; }
   .detail-summary { position: static; }
   .feedback-grid, .feedback-grid.social { grid-template-columns: repeat(2, 1fr); }
@@ -322,7 +335,12 @@ h1 { max-width: 800px; font-size: clamp(38px, 6vw, 72px); line-height: 1.08; let
   .meta { display: none; }
   .cta .btn:not(.btn-primary) { display: none; }
   .explorer-head { padding: 26px 22px; }
+  /* 1枚並び。行を広げる指定はすべて解除する */
   .interest-grid { grid-template-columns: 1fr; }
+  .interest-card,
+  .interest-grid[data-rem3="1"] .interest-card:last-child,
+  .interest-grid[data-rem3="2"] .interest-card:nth-last-child(-n+2),
+  .interest-grid[data-rem2="1"] .interest-card:last-child { grid-column: span 1; }
   .interest-card { min-height: 98px; padding: 18px 22px; }
   .interest-card strong { margin-top: 7px; }
   .detail { padding: 28px 22px; }

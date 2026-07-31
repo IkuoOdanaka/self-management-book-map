@@ -69,10 +69,16 @@
   const interestGrid = byId("interestGrid");
   const chapterNav = byId("chapterNav");
 
-  interestGrid.innerHTML = (DATA.interests || []).map(item => `
+  const interests = DATA.interests || [];
+  interestGrid.innerHTML = interests.map(item => `
     <button class="interest-card" data-key="${item.key}" type="button" aria-controls="detail">
       <small>${item.label}</small><strong>${item.title}</strong><span>${item.note} →</span>
     </button>`).join("");
+
+  // 最終行に余りが出たら、その枚数だけカードを広げて行を埋める（CSS側で対応）。
+  // 3枚並び・2枚並びのそれぞれについて、余りの枚数を渡しておく。
+  interestGrid.dataset.rem3 = String(interests.length % 3);
+  interestGrid.dataset.rem2 = String(interests.length % 2);
 
   // 目次の並び順。navOrder があればそれに従い、無ければ章の定義順
   const navKeys = DATA.navOrder || Object.keys(ALL);
