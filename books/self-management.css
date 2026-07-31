@@ -1,0 +1,85 @@
+/* ============================================================
+   『エンジニアのための自己管理入門』 配色
+   ------------------------------------------------------------
+   配色は書籍カバーから採取。
+   地の色 #64C4D2 ／ 白 ／ 墨色 の3色構成を基準にしている。
+   ============================================================ */
+:root {
+  --cover: #64C4D2;          /* カバーの地の色そのもの */
+  --on-cover: #102d33;       /* --cover の上に載せる文字色 */
+
+  --bg: #eaf4f7;
+  --panel: #ffffff;
+  --ink: #16252b;
+  --ink-mid: #465b63;
+  --ink-soft: #617880;
+  --line: #d5e7ec;
+  --line-strong: #b2d3dc;
+  --accent: #12798d;         /* #64C4D2 を文字色として使える濃度まで落としたもの */
+  --on-accent: #ffffff;      /* アクセント色・章の色の上に載せる文字色 */
+  --shadow: 0 1px 2px rgba(22,37,43,.05), 0 8px 24px rgba(22,37,43,.07);
+
+  --grid: rgba(22,37,43,.035);   /* 背景の方眼 */
+  --hard-shadow: #16252b;        /* 主ボタンの落ち影（ずらし影） */
+
+  /* 興味カードのホバー時 */
+  --interest-bg: #16252b;
+  --interest-ink: #ffffff;
+  --interest-kicker: #12798d;
+
+  /* 章タブ選択時の文字色（章の色 --dc の上に載る） */
+  --on-dc: #ffffff;
+
+  /* 読者の声の1枚目（反転カード） */
+  --feature-bg: #16252b;
+  --feature-line: #d5e7ec;
+  --feature-ink: #ffffff;
+  --feature-ink-soft: rgba(255,255,255,.72);
+  --feature-accent: #12798d;
+
+  /* 章ごとの色 */
+  --c1: #a5650b;
+  --c2: #147a86;
+  --c3: #b1495a;
+  --c4: #6353ab;
+  --c5: #2a63a6;
+  --c0: #6b7c84;
+  --c6: #2f7f61;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1a1f;
+    --panel: #15252b;
+    --ink: #e7f1f4;
+    --ink-mid: #b0c5cc;
+    --ink-soft: #7d959d;
+    --line: #22383f;
+    --line-strong: #33505a;
+    --accent: #64C4D2;       /* 暗所ではカバーの色をそのまま使える */
+    --on-accent: #0e1a1f;    /* 明るい色の上なので、文字は逆に濃色にする */
+    --shadow: 0 1px 2px rgba(0,0,0,.32), 0 8px 24px rgba(0,0,0,.4);
+
+    --grid: rgba(100,196,210,.045);
+    --hard-shadow: #050b0d;
+
+    --interest-bg: #20383f;
+    --interest-ink: #f4fbfc;
+    --interest-kicker: #8bd9e3;
+
+    --on-dc: #102026;
+
+    --feature-bg: #0a1519;
+    --feature-line: #33505a;
+    --feature-ink: #f4fbfc;
+    --feature-ink-soft: #b8cbd1;
+    --feature-accent: #7dd3de;
+
+    --c1: #e0a555;
+    --c2: #5cc0cd;
+    --c3: #e28c99;
+    --c4: #a294e6;
+    --c5: #6fa8e0;
+    --c0: #9fb0b8;
+    --c6: #63c2a0;
+  }
+}

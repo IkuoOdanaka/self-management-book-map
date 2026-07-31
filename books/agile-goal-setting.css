@@ -1,0 +1,93 @@
+/* ============================================================
+   『アジャイルチームによる目標づくりガイドブック』 配色
+   ------------------------------------------------------------
+   配色は書籍カバーから採取。
+   地の紺 #184878 ／ 白 ／ 下帯のライムイエロー の構成を基準にしている。
+
+   1冊目（自己管理入門）はカバーが明るい水色なので「明るい地に濃い文字」だが、
+   本書はカバーが濃紺なので、明所では逆に「濃い地に白文字」になる。
+   暗所では地の色をそのまま使うと沈むため、カバーの明るい青側へ寄せている。
+   ============================================================ */
+:root {
+  --cover: #184878;          /* カバーの地の色そのもの（最頻色） */
+  --on-cover: #ffffff;       /* 濃紺の上なので白 */
+
+  --bg: #eef2f7;
+  --panel: #ffffff;
+  --ink: #16202b;
+  --ink-mid: #46566b;
+  --ink-soft: #61748a;
+  --line: #d8e0ea;
+  --line-strong: #b4c3d5;
+  --accent: #1b5a94;         /* 地の紺を、文字色として映える明度まで起こしたもの */
+  --on-accent: #ffffff;
+  --shadow: 0 1px 2px rgba(22,32,43,.05), 0 8px 24px rgba(22,32,43,.07);
+
+  --grid: rgba(22,32,43,.035);
+  --hard-shadow: #16202b;
+
+  --interest-bg: #16202b;
+  --interest-ink: #ffffff;
+  --interest-kicker: #1b5a94;
+
+  --on-dc: #ffffff;
+
+  --feature-bg: #16202b;
+  --feature-line: #d8e0ea;
+  --feature-ink: #ffffff;
+  --feature-ink-soft: rgba(255,255,255,.72);
+  --feature-accent: #6fa8dc;
+
+  /* STEPごとの色。8STEPあるので c1〜c8、c0 は はじめに／コラム用の中立色 */
+  --c0: #6b7684;
+  --c1: #1f66ad;   /* STEP1 お互いを知ろう */
+  --c2: #a3660a;   /* STEP2 ワクワクする目標をつくろう */
+  --c3: #0d7d77;   /* STEP3 チームのリズムをつくろう */
+  --c4: #6a54b0;   /* STEP4 チームのマインドを育てよう */
+  --c5: #2c7f52;   /* STEP5 助け合えるチームになろう */
+  --c6: #5c7a1e;   /* STEP6 チームの開発生産性を測ろう */
+  --c7: #b0447e;   /* STEP7 チームの外と向き合おう */
+  --c8: #b34a44;   /* STEP8 ゴールにたどり着いたその先に */
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cover: #6fa8dc;        /* 暗所では濃紺が沈むので、カバーの明るい青側を使う */
+    --on-cover: #0c1826;     /* 明るい色の上なので、文字は濃色にする */
+
+    --bg: #0d1621;
+    --panel: #152230;
+    --ink: #e7eef6;
+    --ink-mid: #b0c0d0;
+    --ink-soft: #7d90a4;
+    --line: #223243;
+    --line-strong: #34495f;
+    --accent: #6fa8dc;
+    --on-accent: #0d1621;
+    --shadow: 0 1px 2px rgba(0,0,0,.32), 0 8px 24px rgba(0,0,0,.4);
+
+    --grid: rgba(111,168,220,.045);
+    --hard-shadow: #05090f;
+
+    --interest-bg: #1e3145;
+    --interest-ink: #f2f7fc;
+    --interest-kicker: #9cc8ee;
+
+    --on-dc: #101d29;
+
+    --feature-bg: #091320;
+    --feature-line: #34495f;
+    --feature-ink: #f2f7fc;
+    --feature-ink-soft: #b6c7d8;
+    --feature-accent: #8dbfe8;
+
+    --c0: #9fadbb;
+    --c1: #6fa8e0;
+    --c2: #e0a555;
+    --c3: #4fc0b8;
+    --c4: #a294e6;
+    --c5: #62c48c;
+    --c6: #a8c85c;
+    --c7: #ea86bc;
+    --c8: #ea8a84;
+  }
+}
