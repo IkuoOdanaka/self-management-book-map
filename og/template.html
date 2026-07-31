@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>OGP画像テンプレート</title>
+<!--
+  ============================================================
+  OGP画像（1200×630）の版下
+  ------------------------------------------------------------
+  書籍を追加したら、下の OG_BOOKS に1件足して次を実行します。
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless --disable-gpu --hide-scrollbars \
+      --force-device-scale-factor=1 --virtual-time-budget=8000 \
+      --window-size=1200,630 \
+      --screenshot=og/<slug>.png \
+      "file://<リポジトリの絶対パス>/og/template.html?book=<slug>"
+
+  ブラウザで ?book=<slug> を付けて開けば、そのまま仕上がりを確認できます。
+  ============================================================
+-->
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; }
+  .card {
+    position: relative; width: 1200px; height: 630px; display: flex; align-items: center;
+    padding: 0 74px; box-sizing: border-box; gap: 40px;
+    background:
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(0deg,  var(--grid) 1px, transparent 1px) 0 0 / 40px 40px,
+      var(--cover);
+    color: var(--ink);
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .body { flex: 1 1 auto; min-width: 0; }
+  .kicker {
+    display: flex; align-items: center; gap: 16px;
+    font-size: 19px; font-weight: 800; letter-spacing: .17em; margin-bottom: 22px;
+  }
+  .kicker::before { content: ""; width: 34px; height: 7px; background: var(--ink); flex: 0 0 auto; }
+  h1 {
+    margin: 0; font-size: 66px; line-height: 1.16; letter-spacing: -.045em; font-weight: 800;
+  }
+  h1.small { font-size: 55px; }
+  .rule { width: 470px; height: 1px; background: var(--ink); opacity: .45; margin: 30px 0 24px; }
+  .tagline { margin: 0; font-size: 30px; font-weight: 700; letter-spacing: .02em; }
+
+  /* 立体的な書影 */
+  .stage { flex: 0 0 auto; perspective: 1700px; }
+  .book {
+    position: relative; transform: rotateY(-15deg) rotateX(2deg); transform-style: preserve-3d;
+    filter: drop-shadow(22px 26px 34px rgba(0,0,0,.34));
+  }
+  .book img { display: block; width: 340px; height: auto; border-radius: 2px 4px 4px 2px; }
+  /* 小口（ページの束） */
+  .book::after {
+    content: ""; position: absolute; top: 4px; right: -13px; bottom: 4px; width: 14px;
+    transform: rotateY(78deg); transform-origin: left center; border-radius: 1px;
+    background: repeating-linear-gradient(to right, #fff 0 2px, #dcdcdc 2px 3px);
+  }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="body">
+    <p class="kicker" id="kicker"></p>
+    <h1 id="title"></h1>
+    <div class="rule"></div>
+    <p class="tagline" id="tagline"></p>
+  </div>
+  <div class="stage"><div class="book"><img id="cover" alt=""></div></div>
+</div>
+
+<script>
+/* 書籍ごとの版下データ。1冊追加＝ここに1件。
+   cover … カバーの地の色  ／ ink … その上に載せる文字色
+   title … <br> で改行位置を指定できます */
+const OG_BOOKS = {
+  "self-management": {
+    asin:  "4798194069",
+    cover: "#64C4D2", ink: "#102d33", grid: "rgba(16,45,51,.10)",
+    kicker: "SELF MANAGEMENT / BOOK MAP",
+    title:  "エンジニアのための<br>自己管理入門",
+    tagline:"いまの自分から、読む章を選ぶ。"
+  },
+  "agile-goal-setting": {
+    asin:  "479818473X",
+    cover: "#184878", ink: "#ffffff", grid: "rgba(255,255,255,.11)",
+    kicker: "GOAL SETTING / BOOK MAP",
+    title:  "アジャイルチームによる<br>目標づくりガイドブック",
+    tagline:"いまのチームから、読むSTEPを選ぶ。",
+    small:  true
+  }
+};
+
+const slug = new URLSearchParams(location.search).get("book") || Object.keys(OG_BOOKS)[0];
+const b = OG_BOOKS[slug];
+if (!b) {
+  document.body.innerHTML = "<p style='font:20px sans-serif;padding:40px'>OG_BOOKS に '" + slug + "' がありません</p>";
+} else {
+  const card = document.getElementById("card");
+  card.style.setProperty("--cover", b.cover);
+  card.style.setProperty("--ink", b.ink);
+  card.style.setProperty("--grid", b.grid);
+  document.getElementById("kicker").textContent = b.kicker;
+  const h1 = document.getElementById("title");
+  h1.innerHTML = b.title;
+  if (b.small) h1.classList.add("small");
+  document.getElementById("tagline").textContent = b.tagline;
+  document.getElementById("cover").src =
+    "https://m.media-amazon.com/images/P/" + b.asin + ".09._SCLZZZZZZZ_.jpg";
+}
+</script>
+</body>
+</html>

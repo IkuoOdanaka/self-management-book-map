@@ -119,7 +119,7 @@
           <p class="d-h">この章で扱うこと</p>
           <ul class="points">${d.points.map(([h, b]) => `<li><b>${h}</b><span>${b}</span></li>`).join("")}</ul>
           <details class="detail-more">
-            <summary>キーワードと、この章の背景にある本を見る</summary>
+            <summary>${renderRefs(key) ? "キーワードと、この章の背景にある本を見る" : "キーワードを見る"}</summary>
             <ul class="tags">${d.tags.map(t => `<li>${t}</li>`).join("")}</ul>
             ${renderRefs(key)}
           </details>
