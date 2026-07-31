@@ -186,7 +186,7 @@
   .detail {
     background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
     padding: 26px 26px 28px; box-shadow: var(--shadow);
-    border-top: 3px solid var(--dc);
+    border-top: 3px solid var(--dc); scroll-margin-block-start: 12px;
   }
   @media (max-width: 900px) { .detail { padding: 22px 18px 24px; } }
   .d-label { font-size: 11px; letter-spacing: .16em; font-weight: 700; color: var(--dc); margin: 0 0 4px; }
@@ -759,13 +759,13 @@ const INTERESTS = [
 ];
 
 interestGrid.innerHTML = INTERESTS.map(item => `
-  <button class="interest-card" data-key="${item.key}" type="button">
+  <button class="interest-card" data-key="${item.key}" type="button" aria-controls="detail">
     <small>${item.label}</small><strong>${item.title}</strong><span>${item.note} →</span>
   </button>`).join("");
 
 const NAV_ITEMS = [EXTRAS.intro, ...CHAPTERS, EXTRAS.final, EXTRAS.appendix];
 chapterNav.innerHTML = NAV_ITEMS.map(item => `
-  <button class="chapter-tab" data-key="${item.key}" type="button">${item.label} ${item.short || ""}</button>
+  <button class="chapter-tab" data-key="${item.key}" type="button" aria-controls="detail">${item.label} ${item.short || ""}</button>
 `).join("");
 
 function renderRefs(key) {
@@ -785,7 +785,7 @@ function renderRefs(key) {
       </a></li>`).join("")}</ul>`;
 }
 
-function render(key) {
+function render(key, { scroll = false } = {}) {
   const d = ALL[key];
   detail.style.setProperty("--dc", d.color);
   detail.innerHTML = `
@@ -816,10 +816,15 @@ function render(key) {
     el.setAttribute("aria-pressed", String(el.dataset.key === key));
     if (el.classList.contains("chapter-tab")) el.style.setProperty("--dc", d.color);
   });
+
+  if (scroll) {
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    requestAnimationFrame(() => detail.scrollIntoView({ behavior, block: "start" }));
+  }
 }
 
 document.querySelectorAll(".interest-card, .chapter-tab").forEach(el => {
-  el.addEventListener("click", () => render(el.dataset.key));
+  el.addEventListener("click", () => render(el.dataset.key, { scroll: true }));
 });
 
 render("ch2");
