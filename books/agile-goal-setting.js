@@ -254,7 +254,32 @@ window.BOOK_MAP_DATA = {
   /* ---------- 読者の声 ----------
      quote は原文からの短い抜粋。url は必ず原文を指定します。 */
   feedback: {
-    blogs: [],
+    blogs: [
+      {
+        title: "『アジャイルチームによる目標づくりガイドブック』を読んだ。脳内にいくおさんをどうぞ。",
+        by: "Mitsuyuki.Shiiba",
+        quote: "この本を読むと、いくおさんの考えが流れ込んでくる。",
+        url: "https://bufferings.hatenablog.com/entry/2024/08/14/193752"
+      },
+      {
+        title: "『アジャイルチームによる目標づくりガイドブック』の感想",
+        by: "yonekubo",
+        quote: "この本の本質は「目標ドリブンのチームビルディング」だと感じました。",
+        url: "https://note.com/yonekubo/n/na54aa2634dee"
+      },
+      {
+        title: "強いチームの作り方を学べる「アジャイルチームによる目標づくりガイドブック」",
+        by: "アサノ / asano",
+        quote: "読み進めながらストーリーを追うことで点と点が線になる感覚がとても良かったです。",
+        url: "https://note.com/nash_efp/n/nb984cc62623f"
+      },
+      {
+        title: "『アジャイルチームによる目標づくりガイドブック』を読んでこういうことがやりたかったんだよって気持ちになった",
+        by: "ぱんだおじさん",
+        quote: "初めてリーダーをやる人は事前に読んでおくと良いかも。",
+        url: "https://note.com/out_of_kaya/n/n0006f6a3ff46"
+      }
+    ],
     social: []
   }
 };
