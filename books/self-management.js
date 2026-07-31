@@ -20,14 +20,15 @@ window.BOOK_MAP_DATA = {
     hashtag: "エンジニアのための自己管理入門"   // Xのハッシュタグ（# は付けない）
   },
 
-  /* ---------- 興味・悩みからの入口 ---------- */
+  /* ---------- 興味・悩みからの入口 ----------
+     本編の章と1対1で対応させている。「はじめに」「終章」「巻末付録」は
+     悩みの言葉になりにくいので入口には置かず、目次タブから辿ってもらう。 */
   interests: [
-    { key: "ch1",   label: "01 / ENERGY",    title: "やる気の波を、味方につけたい",     note: "モチベーション" },
-    { key: "ch2",   label: "02 / SPACE",     title: "忙しさから、余白を取り戻したい",   note: "タスク・時間" },
-    { key: "ch3",   label: "03 / RECOVERY",  title: "イライラや消耗から、回復したい",   note: "感情・ストレス" },
-    { key: "ch4",   label: "04 / GROWTH",    title: "学びを、手応えにつなげたい",       note: "スキル・成長" },
-    { key: "ch5",   label: "05 / DIRECTION", title: "これからの道を、自分で選びたい",   note: "キャリア" },
-    { key: "final", label: "06 / TEAM",      title: "自律して動くチームをつくりたい",   note: "マネジメント" }
+    { key: "ch1", label: "01 / ENERGY",    title: "やる気の波を、味方につけたい",   note: "モチベーション" },
+    { key: "ch2", label: "02 / SPACE",     title: "忙しさから、余白を取り戻したい", note: "タスク・時間" },
+    { key: "ch3", label: "03 / RECOVERY",  title: "イライラや消耗から、回復したい", note: "感情・ストレス" },
+    { key: "ch4", label: "04 / GROWTH",    title: "学びを、手応えにつなげたい",     note: "スキル・成長" },
+    { key: "ch5", label: "05 / DIRECTION", title: "これからの道を、自分で選びたい", note: "キャリア" }
   ],
 
   /* ---------- 本編の章 ---------- */

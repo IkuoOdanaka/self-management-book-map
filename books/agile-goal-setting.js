@@ -21,14 +21,18 @@ window.BOOK_MAP_DATA = {
     hashtag: "目標づくりガイドブック"   // Xのハッシュタグ（# は付けない）
   },
 
-  /* ---------- 興味・悩みからの入口 ---------- */
+  /* ---------- 興味・悩みからの入口 ----------
+     本編のSTEPと1対1で対応させている。「はじめに」「コラム」は
+     悩みの言葉になりにくいので入口には置かず、目次タブから辿ってもらう。 */
   interests: [
-    { key: "step1", label: "01 / TRUST",      title: "リーダーになった。まず何から",   note: "チームビルディング" },
-    { key: "step2", label: "02 / EXCITEMENT", title: "ワクワクする目標をつくりたい",   note: "OKR・目標設定" },
-    { key: "step3", label: "03 / RHYTHM",     title: "立てた目標が、形骸化している",   note: "リズム・ふりかえり" },
-    { key: "step4", label: "04 / MINDSET",    title: "うまくいかないと、諦めてしまう", note: "マインドセット" },
+    { key: "step1", label: "01 / TRUST",      title: "リーダーになった。まず何から",     note: "チームビルディング" },
+    { key: "step2", label: "02 / EXCITEMENT", title: "ワクワクする目標をつくりたい",     note: "OKR・目標設定" },
+    { key: "step3", label: "03 / RHYTHM",     title: "立てた目標が、形骸化している",     note: "リズム・ふりかえり" },
+    { key: "step4", label: "04 / MINDSET",    title: "うまくいかないと、諦めてしまう",   note: "マインドセット" },
     { key: "step5", label: "05 / TEAMWORK",   title: "チームの停滞感を、なんとかしたい", note: "協働・GRIT" },
-    { key: "step7", label: "06 / OUTCOME",    title: "外との期待が、ズレている",       note: "アウトカム・ステークホルダー" }
+    { key: "step6", label: "06 / METRICS",    title: "開発生産性の測り方に迷っている",   note: "生産性指標" },
+    { key: "step7", label: "07 / OUTCOME",    title: "外との期待が、ズレている",         note: "アウトカム・ステークホルダー" },
+    { key: "step8", label: "08 / NEXT",       title: "目標が終わると、やりっぱなしになる", note: "ふりかえり・次の目標" }
   ],
 
   /* ---------- 本編のSTEP ---------- */
